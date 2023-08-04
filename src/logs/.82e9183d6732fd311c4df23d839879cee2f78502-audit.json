@@ -1,0 +1,39 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 3
+    },
+    "auditLog": "/Users/shubham.thorat/Documents/Callbreak/http2/client/src/logs/.82e9183d6732fd311c4df23d839879cee2f78502-audit.json",
+    "files": [
+        {
+            "date": 1691089801578,
+            "name": "/Users/shubham.thorat/Documents/Callbreak/http2/client/src/logs/callbreak-game-service.log.2023-08-04_00",
+            "hash": "6324d1c975bfc30fe059ae2eec58b334"
+        },
+        {
+            "date": 1691091031687,
+            "name": "/Users/shubham.thorat/Documents/Callbreak/http2/client/src/logs/callbreak-game-service.log.2023-08-04_01",
+            "hash": "3ec78cbe8ba78126a81d68c3d18bee2c"
+        },
+        {
+            "date": 1691128759625,
+            "name": "/Users/shubham.thorat/Documents/Callbreak/http2/client/src/logs/callbreak-game-service.log.2023-08-04_11",
+            "hash": "8ad9d05c9de1f466e0f1f1a1ff4b02c3"
+        },
+        {
+            "date": 1691130609836,
+            "name": "/Users/shubham.thorat/Documents/Callbreak/http2/client/src/logs/callbreak-game-service.log.2023-08-04_12",
+            "hash": "bb2254f4f65b458e0fde660d48e74223"
+        },
+        {
+            "date": 1691134682850,
+            "name": "/Users/shubham.thorat/Documents/Callbreak/http2/client/src/logs/callbreak-game-service.log.2023-08-04_13",
+            "hash": "072d3a1049c899e1728f079c856138c9"
+        },
+        {
+            "date": 1691137803191,
+            "name": "/Users/shubham.thorat/Documents/Callbreak/http2/client/src/logs/callbreak-game-service.log.2023-08-04_14",
+            "hash": "77f6b551038062cd974e1cad8bfcebd3"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./src/index.js",
+    "post": "nodemon ./post.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "gk-logger": "git+ssh://git@repo.tech.gameskraft.com/call/gk-logger.git",
+    "sleep": "^6.3.0",
+    "util": "^0.12.5"
+  }
+}
