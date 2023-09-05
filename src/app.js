@@ -77,7 +77,13 @@ const sendRequest = (requestCount, retry_count = 0) => {
 }
 
 const main = () => {
-  for (let i = 0; i < 45000; i++) {
+  const total_request = process.env.TOTAL || 10000
+
+  console.log(JSON.stringify({
+    "total_request": parseInt(total_request)
+  }))
+
+  for (let i = 0; i < total_request; i++) {
     sendRequest(i)
   }
 }
