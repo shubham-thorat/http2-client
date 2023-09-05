@@ -1,6 +1,7 @@
-const { Http2 } = require('./connect')
-const { logger, eventEmitter } = require('./utils')
 const async = require('async')
+const { Http2 } = require('./connect')
+const { logger } = require('./utils')
+const statsdclient = require('./statsD')
 
 let client = Http2.getClient()
 
@@ -27,7 +28,10 @@ const queue = async.queue((task, completed) => {
 
 
 const sendRequest = (requestCount, retry_count = 0) => {
+  const startTime = Date.now()
 
+
+  statsdclient.timing('request_send', 1)
   const req = client.request({ ':path': '/', ':method': 'POST' });
   const payload = {
     key: 'HTTP2_KEY',
@@ -59,6 +63,9 @@ const sendRequest = (requestCount, retry_count = 0) => {
   })
 
   req.on('end', () => {
+    const endTime = Date.now()
+    statsdclient.timing('request_received', 1)
+    statsdclient.timing('client_response_time', endTime - startTime)
     logger.info(JSON.stringify({
       'message': 'response data received',
       'data': responseData,

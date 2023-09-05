@@ -20,6 +20,7 @@
     "async": "^3.2.4",
     "dotenv": "^16.3.1",
     "gk-logger": "git+ssh://git@repo.tech.gameskraft.com/call/gk-logger.git",
+    "node-statsd": "^0.1.1",
     "sleep": "^6.3.0",
     "util": "^0.12.5"
   }
