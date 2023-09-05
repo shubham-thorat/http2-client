@@ -37,7 +37,7 @@ class Http2 {
 
     if (!this.instance || this.instance.closed || this.instance.destroyed) {
       console.log('Get Client creating new client for HTTP/2')
-
+      const connectionStartTime = Date.now()
       const is_prod = process.env.IS_PROD === 'true' ? true : false
       const base_url = is_prod ? process.env.BASE_URL : 'https://localhost:6000'
       const certificate_path = '../ssl2/prod-cert.pem'
@@ -52,6 +52,8 @@ class Http2 {
           maxConcurrentStreams: 100000,
         }
       }).on('connect', (stream) => {
+        const connectionEndTime = Date.now()
+        console.log(`Time required to make HTTP/2 connection : ${connectionEndTime - connectionStartTime}ms`)
         console.log('HTTP/2 connected ', stream)
         logger.info(JSON.stringify({
           'message': 'HTTP/2 connected',
