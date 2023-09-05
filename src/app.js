@@ -64,7 +64,7 @@ const sendRequest = (requestCount, retry_count = 0) => {
 
   req.on('end', () => {
     const endTime = Date.now()
-    statsdclient.timing('request_received', 1)
+    statsdclient.timing('response_received', 1)
     statsdclient.timing('client_response_time', endTime - startTime)
     logger.info(JSON.stringify({
       'message': 'response data received',
