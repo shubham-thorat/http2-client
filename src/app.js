@@ -1,13 +1,32 @@
-const { client, setNewConnection } = require('./connect')
+const { Http2 } = require('./connect')
 const { logger, eventEmitter } = require('./utils')
+const async = require('async')
+
+let client = Http2.getClient()
+
+
+const queue = async.queue((task, completed) => {
+
+  if (client.closed) {
+    console.log('client is closed ', client.closed)
+    client = Http2.getClient()
+  }
+  // console.log('started processing ', JSON.stringify(task))
+  logger.info(JSON.stringify({
+    "task": task,
+  }))
+  const remaining = queue.length()
+  sendRequest(task.requestCount, task.retry_count + 1)
+  completed(null, {
+    'requestCount': task.requestCount,
+    'retry_count': task.retry_count + 1,
+    'remaining': remaining
+  })
+}, 1)
+
+
 
 const sendRequest = (requestCount, retry_count = 0) => {
-
-  // if (client.destroyed || client.closed) {
-  //   console.log('In loop', client.destroyed, " ", client.closed, " requestcount", requestCount)
-  //   setNewConnection()
-  // }
-
 
   const req = client.request({ ':path': '/', ':method': 'POST' });
   const payload = {
@@ -24,9 +43,14 @@ const sendRequest = (requestCount, retry_count = 0) => {
       'requestCount': requestCount
     }))
 
-    if (retry_count <= 3) {
-      sendRequest(requestCount, retry_count + 1)
-    }
+
+    queue.push({ requestCount, retry_count }, (err, { requestCount, retry_count, remaining }) => {
+      if (err) {
+        console.log(`there is an error  in the task ${requestCount} ${retry_count}`);
+      } else {
+        // console.log(`queue has execute the task ${requestCount} ${retry_count}.. ${remaining} tasks remaining`);
+      }
+    })
   })
 
   let responseData = ''
@@ -46,7 +70,7 @@ const sendRequest = (requestCount, retry_count = 0) => {
 }
 
 const main = () => {
-  for (let i = 0; i < 23000; i++) {
+  for (let i = 0; i < 45000; i++) {
     sendRequest(i)
   }
 }

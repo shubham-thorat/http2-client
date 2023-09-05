@@ -4,16 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/index.js",
-    "post": "nodemon ./post.js"
+    "client": "node ./src/app.js",
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js",
+    "start-multi": "concurrently \"npm run start\" \"npm run start\" \"npm run start\" \"npm run start\" \"npm run start\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "concurrently": "^8.2.1",
     "nodemon": "^3.0.1"
   },
   "dependencies": {
+    "async": "^3.2.4",
+    "dotenv": "^16.3.1",
     "gk-logger": "git+ssh://git@repo.tech.gameskraft.com/call/gk-logger.git",
     "sleep": "^6.3.0",
     "util": "^0.12.5"
